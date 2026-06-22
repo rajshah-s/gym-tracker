@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gym Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <h1>Gym Tracker</h1>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn ghost" id="btn-export" title="Download a backup of all your data">Export</button>
+      <button class="btn ghost" id="btn-import" title="Restore data from a backup file">Import</button>
+      <input type="file" id="import-file" accept="application/json" hidden />
+    </div>
+  </header>
+
+  <main>
+    <section id="view-calendar" class="view"></section>
+    <section id="view-progress" class="view"></section>
+  </main>
+
+  <!-- Day planner overlay -->
+  <div id="planner-overlay" class="overlay" hidden>
+    <div class="overlay-backdrop" data-close="1"></div>
+    <div id="planner-modal" class="modal" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <!-- Exercise picker overlay -->
+  <div id="picker-overlay" class="overlay" hidden>
+    <div class="overlay-backdrop" data-close="1"></div>
+    <div id="picker-modal" class="modal small" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/cycle.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/planner.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
