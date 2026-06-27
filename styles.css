@@ -412,7 +412,55 @@ html { scroll-behavior: smooth; }
   }
 }
 
-@media (max-width: 560px) {
-  .cal-cell { min-height: 72px; }
-  .topbar { flex-wrap: wrap; gap: 10px; }
+@media (max-width: 700px) {
+  /* Prevent the page from getting wider than the viewport */
+  html, body { overflow-x: hidden; }
+  main { padding: 12px; }
+
+  /* Calendar */
+  .cal-grid { border-radius: 10px; }
+  .cal-cell {
+    min-height: 58px; padding: 4px 4px;
+    /* Ensure cells never push outside the 7-column grid */
+    min-width: 0; overflow: hidden;
+  }
+  .cal-weekday { padding: 7px 4px; font-size: 10px; }
+  .cal-daynum { font-size: 12px; width: 20px; height: 20px; }
+  .chip { font-size: 10px; padding: 2px 5px; border-radius: 5px; margin-top: 3px; }
+  .cal-meta { font-size: 10px; }
+  .cal-title { font-size: 20px; }
+  .cal-legend { gap: 12px; }
+
+  /* Topbar */
+  .topbar { flex-wrap: wrap; gap: 8px; padding: 10px 14px; }
+  .topbar-actions { margin-left: 0; }
+  .brand h1 { font-size: 16px; }
+
+  /* Modals — fill the screen on mobile */
+  .modal {
+    margin: 0; width: 100%; max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+    position: fixed; bottom: 0; left: 0; right: 0;
+  }
+  .overlay { align-items: flex-end; }
+  @keyframes gt-pop {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* Planner modal internals */
+  .pl-splitrow { gap: 5px; }
+  .split-btn { font-size: 13px; padding: 8px 6px; }
+  .pl-variant { gap: 8px; }
+  .pl-loc { margin-left: 0; }
+  .entry-set-badge { font-size: 11px; padding: 3px 8px; }
+  .entry-name { font-size: 13px; }
+
+  /* Progress section */
+  .pr-split-tabs { gap: 5px; }
+  .pr-split-tab { padding: 6px 12px; font-size: 12px; }
+  .pr-controls { flex-direction: column; align-items: stretch; }
+  .pr-select { min-width: 0; width: 100%; }
+  .pr-toggle { justify-content: center; }
 }
