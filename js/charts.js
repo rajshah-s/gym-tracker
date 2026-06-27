@@ -57,16 +57,9 @@
     }
 
     var controls = el("div", "pr-controls");
-    var sel = el("select", "pr-select");
-    withHist.forEach(function (ex) {
-      var o = document.createElement("option");
-      o.value = ex.id;
-      o.textContent = ex.name;
-      if (ex.id === state.exerciseId) o.selected = true;
-      sel.appendChild(o);
-    });
-    sel.addEventListener("change", function () { state.exerciseId = sel.value; render(); });
-    controls.appendChild(sel);
+    controls.appendChild(searchableSelect(withHist, state.exerciseId, function (id) {
+      state.exerciseId = id; render();
+    }));
 
     var toggle = el("div", "pr-toggle");
     [["weight", "Top set (kg)"], ["volume", "Volume (kg·reps)"]].forEach(function (t) {
@@ -170,6 +163,67 @@
         var xl = svgEl("text", { x: cx, y: H - 12, class: "axis-x" });
         xl.textContent = fmtDate(p.date);
         svg.appendChild(xl);
+      }
+    });
+
+    return wrap;
+  }
+
+  // Searchable dropdown: a button that opens a filterable list. Manages its own
+  // open/filter state locally; only calls onChange (which re-renders) on select.
+  function searchableSelect(items, currentId, onChange) {
+    var current = items.filter(function (i) { return i.id === currentId; })[0];
+    var wrap = el("div", "pr-combo");
+
+    var btn = el("button", "pr-combo-btn"); btn.type = "button";
+    var label = el("span", "pr-combo-label");
+    label.textContent = current ? current.name : "Select exercise…";
+    var caret = el("span", "pr-combo-caret"); caret.textContent = "▾";
+    btn.appendChild(label); btn.appendChild(caret);
+
+    var panel = el("div", "pr-combo-panel"); panel.hidden = true;
+    var search = el("input", "pr-combo-search");
+    search.type = "text"; search.placeholder = "Search exercise…";
+    var list = el("div", "pr-combo-list");
+    panel.appendChild(search); panel.appendChild(list);
+
+    wrap.appendChild(btn); wrap.appendChild(panel);
+
+    function renderList() {
+      var q = search.value.trim().toLowerCase();
+      list.innerHTML = "";
+      var matches = items.filter(function (i) { return i.name.toLowerCase().indexOf(q) !== -1; });
+      if (!matches.length) {
+        var none = el("div", "pr-combo-empty"); none.textContent = "No matches";
+        list.appendChild(none); return;
+      }
+      matches.forEach(function (i) {
+        var item = el("button", "pr-combo-item" + (i.id === currentId ? " is-sel" : ""));
+        item.type = "button"; item.textContent = i.name;
+        item.addEventListener("click", function () { close(); onChange(i.id); });
+        list.appendChild(item);
+      });
+    }
+
+    function onDocClick(e) { if (!wrap.contains(e.target)) close(); }
+    function open() {
+      panel.hidden = false; wrap.classList.add("is-open");
+      search.value = ""; renderList(); search.focus();
+      document.addEventListener("mousedown", onDocClick);
+    }
+    function close() {
+      panel.hidden = true; wrap.classList.remove("is-open");
+      document.removeEventListener("mousedown", onDocClick);
+    }
+
+    btn.addEventListener("click", function () { panel.hidden ? open() : close(); });
+    search.addEventListener("input", renderList);
+    search.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { e.stopPropagation(); close(); btn.focus(); }
+      else if (e.key === "Enter") {
+        e.preventDefault();
+        var first = list.querySelector(".pr-combo-item");
+        if (first) first.click();
       }
     });
 

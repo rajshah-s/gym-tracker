@@ -313,10 +313,40 @@ main { max-width: 1080px; margin: 0 auto; padding: 22px; }
 .pr-split-tab.chip-legs.is-on { background: var(--legs); }
 
 .pr-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; flex-wrap: wrap; }
-.pr-select {
-  border: 1px solid var(--line-strong); border-radius: 10px; padding: 9px 12px; font-size: 14px;
-  background: var(--surface2); color: var(--text); min-width: 240px;
+
+/* Searchable exercise dropdown (combobox) */
+.pr-combo { position: relative; min-width: 240px; }
+.pr-combo-btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  width: 100%; border: 1px solid var(--line-strong); border-radius: 10px;
+  padding: 9px 12px; font-size: 14px; background: var(--surface2); color: var(--text);
+  cursor: pointer; text-align: left;
 }
+.pr-combo-btn:hover { border-color: var(--muted); }
+.pr-combo.is-open .pr-combo-btn { border-color: var(--accent); }
+.pr-combo-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 550; }
+.pr-combo-caret { color: var(--muted); font-size: 11px; flex-shrink: 0; transition: transform .15s ease; }
+.pr-combo.is-open .pr-combo-caret { transform: rotate(180deg); }
+
+.pr-combo-panel {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 20;
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: 12px;
+  box-shadow: var(--shadow); padding: 8px; animation: gt-pop .16s cubic-bezier(.2,.7,.3,1) both;
+}
+.pr-combo-search {
+  width: 100%; border: 1px solid var(--line-strong); border-radius: 8px;
+  padding: 8px 10px; font-size: 14px; background: var(--surface2); color: var(--text);
+  margin-bottom: 6px;
+}
+.pr-combo-search:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+.pr-combo-list { display: flex; flex-direction: column; gap: 2px; max-height: 280px; overflow-y: auto; }
+.pr-combo-item {
+  text-align: left; border: none; background: transparent; color: var(--text);
+  border-radius: 8px; padding: 9px 10px; font-size: 14px; cursor: pointer; width: 100%;
+}
+.pr-combo-item:hover { background: var(--surface2); }
+.pr-combo-item.is-sel { background: rgba(77,166,255,.12); color: var(--accent); font-weight: 600; }
+.pr-combo-empty { color: var(--muted); font-size: 13px; padding: 12px 10px; text-align: center; }
 .pr-toggle { display: flex; gap: 3px; background: var(--surface2); padding: 3px; border-radius: 10px; border: 1px solid var(--line); }
 .pr-tg { border: none; background: transparent; padding: 7px 12px; border-radius: 8px; font-size: 13px; cursor: pointer; color: var(--muted); font-weight: 550; }
 .pr-tg.is-on { background: var(--accent); color: #fff; }
