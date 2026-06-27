@@ -457,6 +457,15 @@ html { scroll-behavior: smooth; }
   .entry-set-badge { font-size: 11px; padding: 3px 8px; }
   .entry-name { font-size: 13px; }
 
+  /* Inputs at 16px+ so iOS Safari doesn't auto-zoom (and hesitate) on focus */
+  input, select, textarea,
+  .set-input, .loc-input, .pk-search, .stretch-note, .pr-select {
+    font-size: 16px;
+  }
+  /* keep the kg/reps chips compact even with the larger font */
+  .set-input.wi { width: 52px; }
+  .set-input.ri { width: 42px; }
+
   /* Progress section */
   .pr-split-tabs { gap: 5px; }
   .pr-split-tab { padding: 6px 12px; font-size: 12px; }

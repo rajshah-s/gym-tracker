@@ -300,6 +300,7 @@
 
     var w = el("input", "set-input wi");
     w.type = "number"; w.step = "0.1"; w.min = "0"; w.placeholder = "kg";
+    w.inputMode = "decimal"; // numeric keypad (with decimal) on mobile
     w.value = set.weight === 0 || set.weight ? set.weight : "";
     w.addEventListener("input", function () { set.weight = numOrBlank(w.value); persist(); });
 
@@ -307,6 +308,7 @@
 
     var r = el("input", "set-input ri");
     r.type = "number"; r.step = "1"; r.min = "0"; r.placeholder = "reps";
+    r.inputMode = "numeric"; // whole-number keypad on mobile
     r.value = set.reps === 0 || set.reps ? set.reps : "";
     r.addEventListener("input", function () { set.reps = numOrBlank(r.value); persist(); });
 
