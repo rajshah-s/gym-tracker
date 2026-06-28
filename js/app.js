@@ -8,28 +8,13 @@
     progress: document.getElementById("view-progress")
   };
 
-  function showView(name) {
-    Object.keys(views).forEach(function (k) { views[k].hidden = (k !== name); });
-    document.querySelectorAll(".tabbar-btn").forEach(function (t) {
-      var on = t.getAttribute("data-view") === name;
-      t.classList.toggle("is-active", on);
-      t.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    if (name === "progress") Charts.render();
-    else CalendarView.render();
-    window.scrollTo(0, 0);
-  }
-
   function init() {
     Store.load();
     Planner.init();
     CalendarView.init(views.calendar, openDay);
     Charts.init(views.progress);
     CalendarView.render();
-
-    document.querySelectorAll(".tabbar-btn").forEach(function (t) {
-      t.addEventListener("click", function () { showView(t.getAttribute("data-view")); });
-    });
+    Charts.render();
 
     document.getElementById("btn-export").addEventListener("click", doExport);
     document.getElementById("btn-import").addEventListener("click", function () {

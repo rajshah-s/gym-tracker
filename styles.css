@@ -69,35 +69,7 @@ body {
 .btn.tiny { padding: 4px 10px; font-size: 12px; border-radius: 7px; }
 
 /* ---------- layout ---------- */
-main { max-width: 1080px; margin: 0 auto; padding: 22px; padding-bottom: 110px; }
-
-/* ---------- glass tab bar (iOS-style) ---------- */
-.tabbar {
-  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%); z-index: 40;
-  display: flex; gap: 4px; padding: 6px;
-  border-radius: 22px;
-  /* translucent "clear glass": blur + saturate what scrolls behind it */
-  background: rgba(30, 40, 60, .55);
-  -webkit-backdrop-filter: saturate(180%) blur(22px);
-  backdrop-filter: saturate(180%) blur(22px);
-  border: 1px solid rgba(255, 255, 255, .12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .08);
-}
-.tabbar-btn {
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
-  min-width: 86px; padding: 8px 18px; border: none; cursor: pointer;
-  background: transparent; color: var(--muted);
-  font-size: 11px; font-weight: 600; letter-spacing: .01em;
-  border-radius: 16px; transition: color .2s ease, background-color .2s ease, transform .12s ease;
-}
-.tabbar-btn svg { width: 22px; height: 22px; }
-.tabbar-btn:active { transform: scale(.94); }
-.tabbar-btn.is-active {
-  color: #fff;
-  background: rgba(255, 255, 255, .14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
-}
+main { max-width: 1080px; margin: 0 auto; padding: 22px; }
 
 /* ---------- calendar ---------- */
 .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
@@ -325,6 +297,7 @@ main { max-width: 1080px; margin: 0 auto; padding: 22px; padding-bottom: 110px; 
 .pk-stretch { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-top: 7px; }
 
 /* ---------- progress ---------- */
+#view-progress { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--line); }
 .pr-head { margin-bottom: 14px; }
 .pr-title { font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0; color: var(--text); }
 .pr-empty { color: var(--muted); font-size: 15px; padding: 40px; text-align: center; }
