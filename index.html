@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gym Tracker</title>
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <header class="topbar">
@@ -13,6 +13,7 @@
       <h1>Gym Tracker</h1>
     </div>
     <div class="topbar-actions">
+      <span id="sync-status" class="sync-status" title="Tap to change sync code"></span>
       <button class="btn ghost" id="btn-export" title="Download a backup of all your data">Export</button>
       <button class="btn ghost" id="btn-import" title="Restore data from a backup file">Import</button>
       <input type="file" id="import-file" accept="application/json" hidden />
@@ -36,11 +37,12 @@
     <div id="picker-modal" class="modal small" role="dialog" aria-modal="true"></div>
   </div>
 
-  <script src="js/store.js?v=4"></script>
-  <script src="js/cycle.js?v=4"></script>
-  <script src="js/calendar.js?v=4"></script>
-  <script src="js/planner.js?v=4"></script>
-  <script src="js/charts.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
+  <script src="js/store.js?v=5"></script>
+  <script src="js/cycle.js?v=5"></script>
+  <script src="js/calendar.js?v=5"></script>
+  <script src="js/planner.js?v=5"></script>
+  <script src="js/charts.js?v=5"></script>
+  <script src="js/sync.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
 </body>
 </html>

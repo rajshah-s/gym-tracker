@@ -16,6 +16,18 @@
     CalendarView.render();
     Charts.render();
 
+    // Start cloud sync: pull remote data, then keep it mirrored on every change.
+    if (window.Sync) {
+      Sync.start(function () { CalendarView.render(); Charts.render(); });
+    }
+
+    var syncEl = document.getElementById("sync-status");
+    if (syncEl && window.Sync) {
+      syncEl.addEventListener("click", function () {
+        if (confirm("Change your sync code? You'll be asked for a new one.")) Sync.changeCode();
+      });
+    }
+
     document.getElementById("btn-export").addEventListener("click", doExport);
     document.getElementById("btn-import").addEventListener("click", function () {
       document.getElementById("import-file").click();

@@ -115,6 +115,8 @@
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(_data)); }
     catch (e) { alert("Could not save data: " + e.message); }
+    // Mirror to the cloud if sync is active.
+    if (window.Sync && window.Sync.onLocalSave) window.Sync.onLocalSave();
   }
 
   // ---- Date helpers (local time, no timezone surprises) ----
