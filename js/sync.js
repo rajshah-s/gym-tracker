@@ -77,10 +77,24 @@
     pushTimer = setTimeout(push, 1200);  // debounce rapid edits
   }
 
+  // Re-pull whenever the app returns to the foreground. iOS keeps a home-screen
+  // PWA suspended in memory, so switching back to it doesn't reload — without
+  // this, edits made on another device wouldn't appear until a full relaunch.
+  function maybePull() {
+    if (!code || document.visibilityState !== "visible") return;
+    // Don't yank data out from under an open day-planner edit.
+    var pov = document.getElementById("planner-overlay");
+    if (pov && !pov.hidden) return;
+    pull();
+  }
+
   function start(renderCb) {
     onRemote = renderCb;
     if (!getCode()) { setStatus("Not synced"); return; }
     pull();
+    document.addEventListener("visibilitychange", maybePull);
+    window.addEventListener("focus", maybePull);
+    window.addEventListener("pageshow", maybePull);
   }
 
   // Called by Store.save() after every local change.
